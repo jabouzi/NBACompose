@@ -7,8 +7,7 @@ import com.skanderjabouzi.nbacompose.helpers.TeamEntityAdapter
 import com.skanderjabouzi.nbacompose.helpers.UseCase
 import com.skanderjabouzi.nbacompose.models.network.Team
 import com.skanderjabouzi.nbacompose.models.network.Teams
-import com.skanderjabouzi.nbacompose.teams.data.ITeamsRepository
-import com.skanderjabouzi.nbacompose.teams.data.TeamsRepository
+import com.skanderjabouzi.nbacompose.teams.domain.ITeamsRepository
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

@@ -1,13 +1,11 @@
 package com.skanderjabouzi.nbacompose.players.data
 
-import android.content.Context
 import com.skanderjabouzi.nbacompose.database.PlayersDao
 import com.skanderjabouzi.nbacompose.hilt.IODispatcher
 import com.skanderjabouzi.nbacompose.models.db.PlayerEntity
 import com.skanderjabouzi.nbacompose.models.network.Players
 import com.skanderjabouzi.nbacompose.network.RetrofitClient
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
+import com.skanderjabouzi.nbacompose.players.domain.ITeamPlayersRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -15,7 +13,6 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
 
-@ViewModelScoped
 class TeamPlayersRepository @Inject constructor(
   private val retrofitClient: RetrofitClient,
   private val playersDao: PlayersDao,

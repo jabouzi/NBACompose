@@ -14,7 +14,6 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
 
-@ViewModelScoped
 class TeamDetailsRepository @Inject constructor(
     private val retrofitClient: RetrofitClient,
     private val teamDao: TeamDao,

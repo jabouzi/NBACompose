@@ -1,4 +1,4 @@
-package com.skanderjabouzi.nbacompose.players.data
+package com.skanderjabouzi.nbacompose.players.domain
 
 import com.skanderjabouzi.nbacompose.models.db.PlayerEntity
 import com.skanderjabouzi.nbacompose.models.network.Players

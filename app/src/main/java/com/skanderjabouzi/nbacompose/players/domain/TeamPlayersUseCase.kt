@@ -1,15 +1,9 @@
 package com.skanderjabouzi.nbateamviewer.domain.usecase
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.skanderjabouzi.nbacompose.helpers.PlayerEntityAdapter
-import com.skanderjabouzi.nbacompose.helpers.ResultState
-import com.skanderjabouzi.nbacompose.helpers.SortType
 import com.skanderjabouzi.nbacompose.helpers.UseCase
 import com.skanderjabouzi.nbacompose.models.network.Player
-import com.skanderjabouzi.nbacompose.models.network.Players
-import com.skanderjabouzi.nbacompose.players.data.ITeamPlayersRepository
-import com.skanderjabouzi.nbacompose.players.data.TeamPlayersRepository
+import com.skanderjabouzi.nbacompose.players.domain.ITeamPlayersRepository
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 

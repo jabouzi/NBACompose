@@ -1,4 +1,4 @@
-package com.skanderjabouzi.nbacompose.teams.data
+package com.skanderjabouzi.nbacompose.teams.domain
 
 import com.skanderjabouzi.nbacompose.models.db.TeamEntity
 import com.skanderjabouzi.nbacompose.models.network.Teams

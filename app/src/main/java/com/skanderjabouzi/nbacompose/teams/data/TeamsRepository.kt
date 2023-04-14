@@ -6,6 +6,7 @@ import com.skanderjabouzi.nbacompose.hilt.IODispatcher
 import com.skanderjabouzi.nbacompose.models.db.TeamEntity
 import com.skanderjabouzi.nbacompose.models.network.Teams
 import com.skanderjabouzi.nbacompose.network.RetrofitClient
+import com.skanderjabouzi.nbacompose.teams.domain.ITeamsRepository
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +15,6 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
 
-@ViewModelScoped
 class TeamsRepository @Inject constructor(
   private val retrofitClient: RetrofitClient,
   private val teamDao: TeamDao,
