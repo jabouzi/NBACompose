@@ -1,4 +1,4 @@
-package com.skanderjabouzi.nbacompose.ui.theme
+package com.skanderjabouzi.nbacompose.app.theme
 
 import android.app.Activity
 import android.os.Build

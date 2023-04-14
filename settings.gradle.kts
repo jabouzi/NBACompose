@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "NBACompose"
-include ':app'
+include (":app")

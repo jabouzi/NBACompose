@@ -1,4 +1,4 @@
-package com.skanderjabouzi.nbacompose.ui.theme
+package com.skanderjabouzi.nbacompose.app.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
