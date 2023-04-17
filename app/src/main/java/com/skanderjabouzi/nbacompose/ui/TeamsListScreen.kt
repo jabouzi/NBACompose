@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.skanderjabouzi.nbacompose.components.TeamRow
 import com.skanderjabouzi.nbacompose.models.network.Team
@@ -29,7 +30,7 @@ fun TeamsListScreen(
     teamsListViewModel: TeamsListViewModel = viewModel()
 ) {
     Log.e("TeamsListScreen",  "TeamsListScreen()")
-    val teamsUiState by teamsListViewModel.teams.collectAsState()
+    val teamsUiState by teamsListViewModel.teams.collectAsStateWithLifecycle()
     var displayMenu by remember { mutableStateOf(false) }
 
     Scaffold(
