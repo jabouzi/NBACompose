@@ -25,7 +25,7 @@ import com.skanderjabouzi.nbacompose.components.TeamsListHeader
 @Composable
 fun PlayersListScreen(
     modifier: Modifier = Modifier,
-    teamId: Int,
+    teamId: Int = 0,
     teamsListViewModel: TeamsListViewModel = viewModel()
 ) {
     Log.e("TeamsListScreen",  "TeamsListScreen()")
