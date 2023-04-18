@@ -1,32 +1,32 @@
 package com.skanderjabouzi.nbacompose.navigation
 
-import androidx.compose.runtime.Composable
-import com.skanderjabouzi.nbacompose.ui.PlayersListScreen
-import com.skanderjabouzi.nbacompose.ui.TeamDetailsScreen
-import com.skanderjabouzi.nbacompose.ui.TeamsListScreen
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 
 interface AppDestination {
     val name: String
     val route: String
-    val screen: @Composable () -> Unit
 }
 
-object TeamsListDestination: AppDestination {
+object TeamsListDest : AppDestination {
     override val name = "Teams List"
     override val route = "teamsList"
-    override val screen: @Composable () -> Unit = { TeamsListScreen() }
 }
 
-object TeamDetailsDestination : AppDestination {
+object TeamDetailsDest : AppDestination {
     override val name = "Team Details"
     override val route = "teamDetails"
-    override val screen: @Composable () -> Unit = { TeamDetailsScreen() }
-    const val teamIdArg = "0"
+    const val teamIdArg = "teamId"
+    val routeWithArgs = "$route/{$teamIdArg}"
+    val arguments = listOf(
+        navArgument(teamIdArg) {
+            type = NavType.StringType
+        }
+    )
 }
 
-object TeamPlayersListDestination : AppDestination {
+object TeamPlayersListDest : AppDestination {
     override val name = "Team Players List"
     override val route = "teamPlayersList"
-    override val screen: @Composable () -> Unit = { PlayersListScreen() }
     const val teamIdArg = "0"
 }

@@ -20,18 +20,17 @@ import com.skanderjabouzi.nbacompose.R
 import com.skanderjabouzi.nbacompose.models.network.Player
 import com.skanderjabouzi.nbacompose.models.network.Team
 
-
 @Composable
 fun TeamRow(
     team: Team,
-    onItemClicked: (team: Team) -> Unit,
+    onItemClicked: (teamId: Int?) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     BaseRow(
         title = team.name.toString(),
         firstValue = team.wins.toString(),
         secondValue = team.losses.toString(),
-        onItemClicked = { onItemClicked(team) },
+        onItemClicked = { onItemClicked(team.id) },
         modifier = modifier,
         item = team,
         image = team.imgURL.toString(),
@@ -65,11 +64,11 @@ fun BaseRow(
     image: String,
     imageVisible: Boolean,
     onItemClicked: (any: Any) -> Unit,
-    modifier: Modifier = Modifier,
     item: Any,
+    modifier: Modifier = Modifier,
 ) {
     Surface(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = { onItemClicked(item) }),
     ) {
@@ -81,26 +80,11 @@ fun BaseRow(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
+                    .padding(16.dp)
+                    .fillMaxWidth()
             ) {
                 if (imageVisible) {
-                Row(
-                ) {
-                        AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data(image)
-                                .crossfade(true)
-                                .build(),
-                            placeholder = painterResource(R.drawable.placeholder),
-                            error = painterResource(R.drawable.placeholder),
-                            contentDescription = null,
-                            contentScale = ContentScale.FillWidth,
-                            modifier = Modifier
-                                .clip(CircleShape)
-                                .size(40.dp, 40.dp),
-                        )
-                    }
+                    DisplayImage(image)
                 }
                 Spacer(modifier = Modifier.width(16.dp))
                 Row() {
@@ -109,7 +93,7 @@ fun BaseRow(
                 Spacer(modifier = Modifier.width(16.dp))
                 Row(
                     horizontalArrangement = Arrangement.End,
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                 ) {
                     Row() {
@@ -129,6 +113,24 @@ fun BaseRow(
     }
 }
 
+@Composable
+private fun DisplayImage(image: String) {
+    Row() {
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(image)
+                .crossfade(true)
+                .build(),
+            placeholder = painterResource(R.drawable.placeholder),
+            error = painterResource(R.drawable.placeholder),
+            contentDescription = null,
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier
+                .clip(CircleShape)
+                .size(40.dp, 40.dp),
+        )
+    }
+}
 
 @Preview
 @Composable

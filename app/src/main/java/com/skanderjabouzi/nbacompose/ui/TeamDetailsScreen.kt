@@ -4,69 +4,61 @@ import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.skanderjabouzi.nbacompose.components.TeamRow
-import com.skanderjabouzi.nbacompose.models.network.Team
-import com.skanderjabouzi.nbacompose.teams.presentation.TeamsListViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.skanderjabouzi.nbacompose.R
-import com.skanderjabouzi.nbacompose.components.TeamsListHeader
+import com.skanderjabouzi.nbacompose.components.TeamRow
+import com.skanderjabouzi.nbacompose.helpers.TeamDetailsState
+import com.skanderjabouzi.nbacompose.team.presentation.TeamDetailsViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TeamDetailsScreen(
+    navController: NavHostController,
     modifier: Modifier = Modifier,
-    teamId: Int = 0,
-    teamsListViewModel: TeamsListViewModel = viewModel()
+    teamDetailsViewModel: TeamDetailsViewModel = hiltViewModel(),
+    //teamId: Int = 0,
 ) {
-    Log.e("TeamsListScreen",  "TeamsListScreen()")
-    val teamsUiState by teamsListViewModel.teams.collectAsState()
-    var displayMenu by remember { mutableStateOf(false) }
-
+    Log.e("TeamDetailsScreen", "TeamDetailsScreen()")
+    val teamIdUiState by teamDetailsViewModel.teamDetails.collectAsState()
+    //teamDetailsViewModel.getTeamDetails(teamId)
     Scaffold(
         topBar = {
             Column() {
                 CenterAlignedTopAppBar(
-                    title = { Text(stringResource(id = R.string.teams_list)) },
+                    title = { Text(stringResource(id = R.string.team)) },
                     navigationIcon = {
-                        IconButton(onClick = {}) {
+                        IconButton(onClick = {
+                            navController.popBackStack()
+                        }) {
                             Icon(Icons.Filled.ArrowBack, null)
                         }
                     },
                 )
             }
         },
-        content =  {
-            TeamDetails(modifier = modifier, teamsList = teamsUiState)
+        content = {
+            TeamDetails(modifier = modifier, teamDetailsState = teamIdUiState)
         }
     )
 }
 
 @Composable
 fun TeamDetails(
+    teamDetailsState: TeamDetailsState,
     modifier: Modifier = Modifier,
-    teamsList: List<Team>
-) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 120.dp),
-    ) {
-        items(teamsList) { team ->
-            TeamRow(modifier = modifier, team = team, onItemClicked = {})
-        }
-        item {
-            Spacer(modifier = Modifier.height(24.dp))
-        }
-    }
 
+) {
+    Text(
+        text = teamDetailsState.team?.name.toString(),
+        modifier = modifier.padding(10.dp),
+    )
 }

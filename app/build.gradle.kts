@@ -85,6 +85,7 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
     implementation ("io.coil-kt:coil:2.3.0")
     implementation ("com.google.dagger:hilt-android:2.44.2")
+    implementation("com.google.firebase:firebase-crashlytics-buildtools:2.8.1")
     kapt ("com.google.dagger:hilt-android-compiler:2.44.2")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation ("androidx.room:room-runtime:2.5.1")

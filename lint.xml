@@ -12,4 +12,7 @@
     <issue id="ComposableNaming" severity="error" />
     <issue id="CompositionLocalNaming" severity="error" />
     <issue id="MutableCollectionMutableState" severity="error" />
+    <issue id="ComposeCompositionLocalUsage">
+        <option name="allowed-composition-locals" value="LocalAnalyticsHelper" />
+    </issue>
 </lint>
