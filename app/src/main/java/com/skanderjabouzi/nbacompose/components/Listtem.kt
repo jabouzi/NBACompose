@@ -84,7 +84,7 @@ fun BaseRow(
                     .fillMaxWidth()
             ) {
                 if (imageVisible) {
-                    DisplayImage(image)
+                    DisplayImage(image, 40.dp, 40.dp)
                 }
                 Spacer(modifier = Modifier.width(16.dp))
                 Row() {
@@ -109,25 +109,6 @@ fun BaseRow(
         Divider(
             thickness = 1.dp,
             color = Color.LightGray,
-        )
-    }
-}
-
-@Composable
-private fun DisplayImage(image: String) {
-    Row() {
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(image)
-                .crossfade(true)
-                .build(),
-            placeholder = painterResource(R.drawable.placeholder),
-            error = painterResource(R.drawable.placeholder),
-            contentDescription = null,
-            contentScale = ContentScale.FillWidth,
-            modifier = Modifier
-                .clip(CircleShape)
-                .size(40.dp, 40.dp),
         )
     }
 }

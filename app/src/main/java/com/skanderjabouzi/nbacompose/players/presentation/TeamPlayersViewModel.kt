@@ -1,7 +1,7 @@
 package com.skanderjabouzi.nbacompose.players.presentation
 
 import androidx.lifecycle.*
-import com.skanderjabouzi.nbateamviewer.domain.usecase.TeamPlayersUseCase
+import com.skanderjabouzi.nbacompose.players.domain.TeamPlayersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

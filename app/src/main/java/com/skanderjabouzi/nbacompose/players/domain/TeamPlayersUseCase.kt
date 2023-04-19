@@ -1,16 +1,15 @@
-package com.skanderjabouzi.nbateamviewer.domain.usecase
+package com.skanderjabouzi.nbacompose.players.domain
 
 import androidx.lifecycle.MutableLiveData
 import com.skanderjabouzi.nbacompose.helpers.UseCase
 import com.skanderjabouzi.nbacompose.models.network.Player
-import com.skanderjabouzi.nbacompose.players.domain.ITeamPlayersRepository
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
 @ViewModelScoped
 class TeamPlayersUseCase @Inject constructor(
     val repository: ITeamPlayersRepository
-): UseCase() {
+) : UseCase() {
     val playersList = MutableLiveData<List<Player>>()
 
 //    suspend fun getTeamPlayers(teamId: Int) {

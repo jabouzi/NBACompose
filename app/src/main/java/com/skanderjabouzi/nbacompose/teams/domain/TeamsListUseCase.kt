@@ -1,4 +1,4 @@
-package com.skanderjabouzi.nbateamviewer.domain.usecase
+package com.skanderjabouzi.nbacompose.teams.domain
 
 import android.util.Log
 import com.skanderjabouzi.nbacompose.helpers.ResultState
@@ -7,17 +7,15 @@ import com.skanderjabouzi.nbacompose.helpers.TeamEntityAdapter
 import com.skanderjabouzi.nbacompose.helpers.UseCase
 import com.skanderjabouzi.nbacompose.models.network.Team
 import com.skanderjabouzi.nbacompose.models.network.Teams
-import com.skanderjabouzi.nbacompose.teams.domain.ITeamsRepository
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-//import kotlinx.coroutines.flow.internal.NopCollector.emit
 import javax.inject.Inject
 
 @ViewModelScoped
 class TeamsListUseCase @Inject constructor(
     private val repository: ITeamsRepository,
-): UseCase() {
+) : UseCase() {
 
     suspend fun getTeams(): Flow<List<Team>> {
         val teamsCount = repository.getTeamsCount()
@@ -46,10 +44,11 @@ class TeamsListUseCase @Inject constructor(
                         val teams = (resultState.data as Teams).teams
                         if (teams != null) {
                             Log.e("# TeamsListUseCase 4", "$teams")
-                            //teams?.let {
                             saveTeamsToDb(teams)
                             teams
-                        } else emptyList()
+                        } else {
+                            emptyList()
+                        }
                     }
                     else -> emptyList()
                 }

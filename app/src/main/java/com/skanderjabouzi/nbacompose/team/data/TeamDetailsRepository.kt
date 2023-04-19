@@ -34,7 +34,7 @@ class TeamDetailsRepository @Inject constructor(
 
     override suspend fun getTeamsDetails(id: Int): Flow<Response<TeamDetails>> {
         return flow {
-            retrofitClient.getTeamDetails(id)
+            emit(retrofitClient.getTeamDetails(id))
         }
     }
 
