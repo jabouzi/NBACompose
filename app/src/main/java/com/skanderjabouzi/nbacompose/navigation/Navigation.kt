@@ -30,20 +30,29 @@ fun NbaNavHost(
             arguments = TeamDetailsDest.arguments,
         ) { navBackStackEntry ->
             val teamId = navBackStackEntry.arguments?.getString(TeamDetailsDest.teamIdArg)
-            teamId?.toInt()?.let { TeamDetailsScreen(navController = navController) }
+            teamId?.toInt()?.let {
+                TeamDetailsScreen(
+                    onBackClicked = { navController.popBackStack() },
+                    onButtonClicked = { navController.navigateToTeamPlayers(it) }
+                )
+            }
         }
-        composable(route = "${TeamPlayersListDest.route}/${TeamDetailsDest.teamIdArg}") {
-            PlayersListScreen()
+        composable(
+            route = TeamPlayersListDest.routeWithArgs,
+            arguments = TeamPlayersListDest.arguments,
+        ) { navBackStackEntry ->
+            val teamId = navBackStackEntry.arguments?.getString(TeamPlayersListDest.teamIdArg)
+            teamId?.toInt()?.let { PlayersListScreen(onBackClicked = { navController.popBackStack() }) }
         }
     }
 }
 
-fun NavHostController.navigateSingleTopTo(route: String) {
+fun NavHostController.navigateSingleTopTo(route: String, doSaveState: Boolean = true) {
     this.navigate(route) {
         popUpTo(
             this@navigateSingleTopTo.graph.findStartDestination().id
         ) {
-            saveState = true
+            saveState = doSaveState
         }
         launchSingleTop = true
         restoreState = true
@@ -52,4 +61,8 @@ fun NavHostController.navigateSingleTopTo(route: String) {
 
 private fun NavHostController.navigateToTeamDetails(teamId: Int) {
     this.navigateSingleTopTo("${TeamDetailsDest.route}/$teamId")
+}
+
+private fun NavHostController.navigateToTeamPlayers(teamId: Int) {
+    this.navigateSingleTopTo("${TeamPlayersListDest.route}/$teamId", false)
 }

@@ -9,12 +9,12 @@ import retrofit2.http.Path
 
 interface TeamsApi {
 
-  @GET("teams.json")
-  suspend fun getTeams(): Response<Teams>
+    @GET("teams.json")
+    suspend fun getTeams(): Response<Teams>
 
-  @GET("{team_id}.json")
-  suspend fun getPlayers(@Path("team_id") teamId: Int): Response<Players>
+    @GET("{team_id}.json")
+    suspend fun getPlayers(@Path("team_id") teamId: Int): Response<Players>
 
-  @GET("team_{team_id}.json")
-  suspend fun getTeamDetails(@Path("team_id") teamId: Int): Response<TeamDetails>
+    @GET("team_{team_id}.json")
+    suspend fun getTeamDetails(@Path("team_id") teamId: Int): Response<TeamDetails>
 }

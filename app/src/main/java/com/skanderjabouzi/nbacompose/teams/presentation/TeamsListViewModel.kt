@@ -1,7 +1,8 @@
 package com.skanderjabouzi.nbacompose.teams.presentation
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.skanderjabouzi.nbacompose.hilt.DefaultDispatcher
 import com.skanderjabouzi.nbacompose.models.network.Team
 import com.skanderjabouzi.nbacompose.teams.domain.TeamsListUseCase

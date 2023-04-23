@@ -34,14 +34,11 @@ class TeamDetailsUseCase @Inject constructor(
 
     private suspend fun getRemoteTeamDetails(id: Int): Flow<TeamDetails?> {
         return repository.getTeamsDetails(id).map { response ->
-            Log.e("TeamDetailsUseCase", "response ${response.body()}")
             val resultState = getRequestFromApi(response)
-            Log.e("TeamDetailsUseCase", "resultState $resultState")
             if (resultState != null) {
                 when (resultState) {
                     is ResultState.Success -> {
                         val details = (resultState.data as TeamDetails)
-                        Log.e("TeamDetailsUseCase", "resultState $details")
                         saveTeamDetailsToDb(details)
                         details
                     }

@@ -8,16 +8,15 @@ import javax.inject.Inject
 
 class RetrofitClient @Inject constructor(private val teamsApi: TeamsApi) {
 
-  suspend fun getTeams(): Response<Teams> {
-    return teamsApi.getTeams()
-  }
+    suspend fun getTeams(): Response<Teams> {
+        return teamsApi.getTeams()
+    }
 
-  suspend fun getPlayers(teamId: Int): Response<Players> {
-    return teamsApi.getPlayers(teamId)
-  }
+    suspend fun getPlayers(teamId: Int): Response<Players> {
+        return teamsApi.getPlayers(teamId)
+    }
 
-  suspend fun getTeamDetails(teamId: Int): Response<TeamDetails> {
-    return teamsApi.getTeamDetails(teamId)
-  }
-
+    suspend fun getTeamDetails(teamId: Int): Response<TeamDetails> {
+        return teamsApi.getTeamDetails(teamId)
+    }
 }

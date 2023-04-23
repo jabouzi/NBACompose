@@ -36,7 +36,8 @@ import com.skanderjabouzi.nbacompose.team.presentation.TeamDetailsViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TeamDetailsScreen(
-    navController: NavHostController,
+    onBackClicked: () -> Unit,
+    onButtonClicked: (Int) -> Unit,
     modifier: Modifier = Modifier,
     teamDetailsViewModel: TeamDetailsViewModel = hiltViewModel(),
 ) {
@@ -48,25 +49,27 @@ fun TeamDetailsScreen(
                 CenterAlignedTopAppBar(
                     title = { Text(stringResource(id = R.string.team)) },
                     navigationIcon = {
-                        IconButton(onClick = {
-                            navController.popBackStack()
-                        }) {
+                        IconButton(onClick = { onBackClicked() }) {
                             Icon(Icons.Filled.ArrowBack, null)
                         }
                     },
                 )
             }
-        },
-        content = {
-            TeamDetails(modifier = modifier, teamDetailsState = teamIdUiState)
         }
-    )
+    ) {
+        TeamDetails(
+            modifier = modifier,
+            teamDetailsState = teamIdUiState,
+            onButtonClicked = onButtonClicked
+        )
+    }
 }
 
 @Composable
 private fun TeamDetails(
     teamDetailsState: TeamDetailsState,
     modifier: Modifier = Modifier,
+    onButtonClicked: (Int) -> Unit,
 ) {
     Log.e("TeamDetailsScreen", "$teamDetailsState")
     Surface(
@@ -76,7 +79,7 @@ private fun TeamDetails(
     ) {
         TeamDetailInfo(
             team = teamDetailsState.team,
-            onButtonClicked = {},
+            onButtonClicked = onButtonClicked,
             modifier = modifier
         )
     }
@@ -85,8 +88,8 @@ private fun TeamDetails(
 @Composable
 private fun TeamDetailInfo(
     team: TeamDetails?,
-    onButtonClicked: (Int) -> Unit,
     modifier: Modifier = Modifier,
+    onButtonClicked: (Int) -> Unit,
 ) {
     Log.e("TeamDetailsScreen", "$team")
     Column(
@@ -103,6 +106,7 @@ private fun TeamDetailInfo(
                 Text(text = team?.region.toString())
             }
             Column(modifier = Modifier.weight(2f)) {
+                Log.e("TeamDetailInfo", "teamId ${team?.id}")
                 OutlinedButton(onClick = { team?.id?.let { onButtonClicked(it) } }) {
                     Text(text = stringResource(id = R.string.team_players))
                 }

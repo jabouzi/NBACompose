@@ -14,34 +14,34 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class TeamPlayersRepository @Inject constructor(
-  private val retrofitClient: RetrofitClient,
-  private val playersDao: PlayersDao,
-  @IODispatcher private val dispatcher: CoroutineDispatcher,
+    private val retrofitClient: RetrofitClient,
+    private val playersDao: PlayersDao,
+    @IODispatcher private val dispatcher: CoroutineDispatcher,
 ) : ITeamPlayersRepository {
 
-  override suspend fun getSavedPlayers(teamId: Int): Flow<List<PlayerEntity>> {
-    return withContext(dispatcher) {
-      playersDao.getPlayers(teamId)
+    override suspend fun getSavedPlayers(teamId: Int): Flow<List<PlayerEntity>> {
+        return withContext(dispatcher) {
+            playersDao.getPlayers(teamId)
+        }
     }
-  }
 
-  override suspend fun savePlayers(players: List<PlayerEntity>) {
-    withContext(dispatcher) {
-      for (player in players) {
-        playersDao.insert(player)
-      }
+    override suspend fun savePlayers(players: List<PlayerEntity>) {
+        withContext(dispatcher) {
+            for (player in players) {
+                playersDao.insert(player)
+            }
+        }
     }
-  }
 
-  override suspend fun getPlayers(teamId: Int): Flow<Response<Players>> {
-    return flow {
-      retrofitClient.getPlayers(teamId)
+    override suspend fun getPlayers(teamId: Int): Flow<Response<Players>> {
+        return flow {
+            emit(retrofitClient.getPlayers(teamId))
+        }
     }
-  }
 
-  override suspend fun getPlayerExists(id: Int): Int {
-    return withContext(dispatcher) {
-      playersDao.getPlayerExists(id)
+    override suspend fun getPlayerExists(id: Int): Int {
+        return withContext(dispatcher) {
+            playersDao.getPlayerExists(id)
+        }
     }
-  }
 }

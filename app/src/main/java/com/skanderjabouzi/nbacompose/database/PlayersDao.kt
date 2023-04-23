@@ -15,6 +15,6 @@ interface PlayersDao {
     @Query("SELECT * FROM playerentity WHERE teamId = :id")
     fun getPlayers(id: Int): Flow<List<PlayerEntity>>
 
-    @Query("SELECT count(*) FROM playerentity WHERE id = :id")
+    @Query("SELECT count(*) FROM playerentity WHERE teamId = :id")
     fun getPlayerExists(id: Int): Int
 }
