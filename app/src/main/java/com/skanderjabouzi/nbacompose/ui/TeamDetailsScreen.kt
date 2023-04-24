@@ -25,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.skanderjabouzi.nbacompose.R
 import com.skanderjabouzi.nbacompose.components.DisplayImage
@@ -42,7 +43,7 @@ fun TeamDetailsScreen(
     teamDetailsViewModel: TeamDetailsViewModel = hiltViewModel(),
 ) {
     Log.e("TeamDetailsScreen", "TeamDetailsScreen()")
-    val teamIdUiState by teamDetailsViewModel.teamDetails.collectAsState()
+    val teamIdUiState by teamDetailsViewModel.teamDetails.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
             Column() {
