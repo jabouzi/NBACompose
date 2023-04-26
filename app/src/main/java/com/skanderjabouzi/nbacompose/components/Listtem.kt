@@ -106,10 +106,6 @@ fun BaseRow(
                 }
             }
         }
-        Divider(
-            thickness = 1.dp,
-            color = Color.LightGray,
-        )
     }
 }
 
