@@ -1,0 +1,65 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+          cache: gradle
+
+      - name: Edit build.gradle file
+        run: |
+          SUFFIX=""
+          BRANCH_NAME=${GITHUB_REF##*/}
+          BUILD_NUMBER=${{ github.run_number }}
+          if [ "$BRANCH_NAME" == "main" ]; then
+          SUFFIX="-dev"
+          fi
+          DATE=$(date +"%y%m%d")
+          echo "Changing version code to $DATE"
+          sed -i "s/versionName = \"\(.*\)\"/versionName = \"\1.$BUILD_NUMBER$SUFFIX\"/" app/build.gradle.kts 
+          sed -i "s/versionCode .*/versionCode = $DATE/" app/build.gradle.kts       
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Check lint
+        run: ./gradlew lintDemoDebug lintTelusDebug
+
+      - name: Check Detekt
+        run: ./gradlew detekt
+
+      - name: Run local tests
+        run: ./gradlew testDemoDebug testTelusDebug
+
+      - if: github.ref == 'refs/heads/main'
+        name: Build the AppCenter Alpha-TelusDebug and automation variant and run tests
+        run: ./gradlew assembleTelusDebug assembleDemoDebug testDemoDebugUnitTest testTelusDebugUnitTest
+
+        ### Upload the builds to App Center when code is merged with "master" branch
+      - if: github.ref == 'refs/heads/main'
+        name: Deploy to AppCenter Alpha-Stg Variant
+        uses: wzieba/AppCenter-Github-Action@v1
+        with:
+          appName: TELUS/Telus-Connected-Home-Dev
+          token: ${{ secrets.APP_CENTER_TOKEN_DEV }}
+          group: TelusConnectTesters
+          file: app/build/outputs/apk/telus/debug/app-telus-debug.apk
+          gitReleaseNotes: true
+          notifyTesters: true
+          debug: false

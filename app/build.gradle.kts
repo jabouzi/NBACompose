@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace = "com.skanderjabouzi.nbacompose"
-    compileSdk = 33
+    namespace = AppConfig.namespace
+    compileSdk = AppConfig.compileSdkVersion
 
     defaultConfig {
-        applicationId = "com.skanderjabouzi.nbacompose"
-        minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = AppConfig.applicationId
+        minSdk = AppConfig.minSdkVersion
+        targetSdk = AppConfig.targetSdkVersion
+        versionCode = AppConfig.versionCode
+        versionName = AppConfig.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
