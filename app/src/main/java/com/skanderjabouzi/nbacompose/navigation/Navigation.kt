@@ -2,67 +2,54 @@ package com.skanderjabouzi.nbacompose.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import com.skanderjabouzi.nbacompose.ui.PlayersListScreen
-import com.skanderjabouzi.nbacompose.ui.TeamDetailsScreen
-import com.skanderjabouzi.nbacompose.ui.TeamsListScreen
+import com.skanderjabouzi.nbacompose.navigation.player.navigateToPlayers
+import com.skanderjabouzi.nbacompose.navigation.player.playersScreen
+import com.skanderjabouzi.nbacompose.navigation.team.TeamGraphNavigationRoute
+import com.skanderjabouzi.nbacompose.navigation.team.navigateToTeamDetails
+import com.skanderjabouzi.nbacompose.navigation.team.navigateToTeamsList
+import com.skanderjabouzi.nbacompose.navigation.team.teamGraph
+import com.skanderjabouzi.nbacompose.navigation.team.teamsScreen
+
+const val TeamIdArg = "teamIdArg"
+fun NavBackStackEntry.requireStringArg(argument: String) =
+    arguments?.getString(argument) ?: error("Missing required argument: $argument")
 
 @Composable
 fun NbaNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
+    startDestination: String = TeamGraphNavigationRoute
 ) {
     NavHost(
         navController = navController,
-        startDestination = TeamsListDest.route,
+        startDestination = startDestination,
         modifier = modifier
     ) {
-        composable(route = TeamsListDest.route) {
-            TeamsListScreen(onItemClicked = { teamId ->
-                navController.navigateToTeamDetails(teamId)
-            })
-        }
-        composable(
-            route = TeamDetailsDest.routeWithArgs,
-            arguments = TeamDetailsDest.arguments,
-        ) { navBackStackEntry ->
-            val teamId = navBackStackEntry.arguments?.getString(TeamDetailsDest.teamIdArg)
-            teamId?.toInt()?.let {
-                TeamDetailsScreen(
-                    onBackClicked = { navController.popBackStack() },
-                    onButtonClicked = { navController.navigateToTeamPlayers(it) }
-                )
-            }
-        }
-        composable(
-            route = TeamPlayersListDest.routeWithArgs,
-            arguments = TeamPlayersListDest.arguments,
-        ) { navBackStackEntry ->
-            val teamId = navBackStackEntry.arguments?.getString(TeamPlayersListDest.teamIdArg)
-            teamId?.toInt()?.let { PlayersListScreen(onBackClicked = { navController.popBackStack() }) }
-        }
+        teamGraph(
+            navController = navController,
+        )
+        playersScreen(
+            navController = navController
+        )
     }
 }
 
-fun NavHostController.navigateSingleTopTo(route: String, doSaveState: Boolean = true) {
-    this.navigate(route) {
+fun NavController.navigateSingleTop(route: String, doSaveState: Boolean = true, navOptions: NavOptions? = null) {
+    this.navigate(
+        route = route,
+    ) {
         popUpTo(
-            this@navigateSingleTopTo.graph.findStartDestination().id
+            this@navigateSingleTop.graph.findStartDestination().id
         ) {
             saveState = doSaveState
         }
         launchSingleTop = true
         restoreState = true
     }
-}
-
-private fun NavHostController.navigateToTeamDetails(teamId: Int) {
-    this.navigateSingleTopTo("${TeamDetailsDest.route}/$teamId")
-}
-
-private fun NavHostController.navigateToTeamPlayers(teamId: Int) {
-    this.navigateSingleTopTo("${TeamPlayersListDest.route}/$teamId", false)
 }
