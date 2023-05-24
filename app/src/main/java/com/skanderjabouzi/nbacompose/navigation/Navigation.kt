@@ -11,6 +11,9 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import com.skanderjabouzi.nbacompose.navigation.player.playersScreen
 import com.skanderjabouzi.nbacompose.navigation.team.TeamGraphNavigationRoute
+import com.skanderjabouzi.nbacompose.navigation.team.TeamNavigationRoute
+import com.skanderjabouzi.nbacompose.navigation.team.TeamsNavigationRoute
+import com.skanderjabouzi.nbacompose.navigation.team.navigateToTeamDetails
 import com.skanderjabouzi.nbacompose.navigation.team.teamGraph
 
 const val TeamIdArg = "teamIdArg"
@@ -32,13 +35,14 @@ fun NbaNavHost(
             navController = navController,
         )
         playersScreen(
-            navController = navController
+            onBackClicked = {
+                navController.navigateToTeamDetails(it)
+            }
         )
     }
 }
 
-fun NavController.navigateSingleTop(route: String, doSaveState: Boolean = true, navOptions: NavOptions? = null) {
-    Log.e("####", route)
+fun NavController.navigateSingleTop(route: String, doSaveState: Boolean = false) {
     this.navigate(
         route = route,
     ) {

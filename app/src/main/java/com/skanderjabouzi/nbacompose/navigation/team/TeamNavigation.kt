@@ -13,8 +13,8 @@ import com.skanderjabouzi.nbacompose.ui.TeamDetailsScreen
 
 const val TeamNavigationRoute = "Team"
 
-fun NavController.navigateToTeamDetails(teamId: Int, navOptions: NavOptions? = null) {
-    this.navigateSingleTop(route = "$TeamNavigationRoute/$teamId", navOptions = navOptions)
+fun NavController.navigateToTeamDetails(teamId: Int) {
+    this.navigateSingleTop(route = "$TeamNavigationRoute/$teamId")
 }
 
 fun NavGraphBuilder.teamScreen(

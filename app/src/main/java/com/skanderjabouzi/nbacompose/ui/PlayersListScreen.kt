@@ -42,7 +42,7 @@ import com.skanderjabouzi.nbacompose.players.presentation.TeamPlayersViewModel
 fun PlayersListScreen(
     modifier: Modifier = Modifier,
     teamPlayersViewModel: TeamPlayersViewModel = hiltViewModel(),
-    onBackClicked: () -> Unit,
+    onBackClicked: (Int) -> Unit,
 ) {
     Log.e("TeamsListScreen", "TeamsListScreen()")
     val playersUiState by teamPlayersViewModel.players.collectAsStateWithLifecycle()
@@ -54,7 +54,7 @@ fun PlayersListScreen(
                 CenterAlignedTopAppBar(
                     title = { Text(stringResource(id = R.string.players_list)) },
                     navigationIcon = {
-                        IconButton(onClick = { onBackClicked() }) {
+                        IconButton(onClick = { onBackClicked(teamPlayersViewModel.teamId.toInt()) }) {
                             Icon(Icons.Filled.ArrowBack, null)
                         }
                     },

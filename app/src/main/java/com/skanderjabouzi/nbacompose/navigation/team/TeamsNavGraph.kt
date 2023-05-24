@@ -4,12 +4,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.navigation
+import com.skanderjabouzi.nbacompose.navigation.navigateSingleTop
 import com.skanderjabouzi.nbacompose.navigation.player.navigateToPlayers
 
 const val TeamGraphNavigationRoute = "teamNavGraph"
 
-fun NavController.navigateToDevicesGraph(navOptions: NavOptions? = null) {
-    this.navigate(TeamNavigationRoute, navOptions)
+fun NavController.navigateToDevicesGraph() {
+    this.navigateSingleTop(TeamNavigationRoute)
 }
 
 fun NavGraphBuilder.teamGraph(
@@ -21,7 +22,7 @@ fun NavGraphBuilder.teamGraph(
     ) {
         teamScreen(
             onBackClicked = {
-                navController.popBackStack(TeamsNavigationRoute, inclusive = true)
+                navController.popBackStack(TeamsNavigationRoute, inclusive = false)
             },
             onButtonClicked = {
                 navController.navigateToPlayers(it)

@@ -9,8 +9,8 @@ import com.skanderjabouzi.nbacompose.ui.TeamsListScreen
 
 const val TeamsNavigationRoute = "Teams"
 
-fun NavController.navigateToTeamsList(navOptions: NavOptions? = null) {
-    this.navigateSingleTop(route = TeamsNavigationRoute, navOptions = navOptions)
+fun NavController.navigateToTeamsList() {
+    this.navigateSingleTop(route = TeamsNavigationRoute)
 }
 
 fun NavGraphBuilder.teamsScreen(
