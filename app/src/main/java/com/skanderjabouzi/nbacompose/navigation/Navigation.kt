@@ -1,5 +1,6 @@
 package com.skanderjabouzi.nbacompose.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavBackStackEntry
@@ -8,13 +9,9 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
-import com.skanderjabouzi.nbacompose.navigation.player.navigateToPlayers
 import com.skanderjabouzi.nbacompose.navigation.player.playersScreen
 import com.skanderjabouzi.nbacompose.navigation.team.TeamGraphNavigationRoute
-import com.skanderjabouzi.nbacompose.navigation.team.navigateToTeamDetails
-import com.skanderjabouzi.nbacompose.navigation.team.navigateToTeamsList
 import com.skanderjabouzi.nbacompose.navigation.team.teamGraph
-import com.skanderjabouzi.nbacompose.navigation.team.teamsScreen
 
 const val TeamIdArg = "teamIdArg"
 fun NavBackStackEntry.requireStringArg(argument: String) =
@@ -41,6 +38,7 @@ fun NbaNavHost(
 }
 
 fun NavController.navigateSingleTop(route: String, doSaveState: Boolean = true, navOptions: NavOptions? = null) {
+    Log.e("####", route)
     this.navigate(
         route = route,
     ) {

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.skanderjabouzi.nbacompose.helpers.TeamDetailsState
 import com.skanderjabouzi.nbacompose.models.network.TeamDetails
 import com.skanderjabouzi.nbacompose.navigation.TeamDetailsDest
+import com.skanderjabouzi.nbacompose.navigation.TeamIdArg
 import com.skanderjabouzi.nbacompose.team.domain.TeamDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +25,7 @@ class TeamDetailsViewModel @Inject constructor(
     val teamDetails: StateFlow<TeamDetailsState> = _teamDetails
 
     init {
-        val teamId = checkNotNull(savedStateHandle.get<String>(TeamDetailsDest.teamIdArg))
+        val teamId = checkNotNull(savedStateHandle.get<String>(TeamIdArg))
         getTeamDetails(teamId.toInt())
     }
 

@@ -22,7 +22,7 @@ fun NavGraphBuilder.playersScreen(
     navController: NavController,
 ) {
     composable(
-        route = "$PlayersNavigationRoute/$TeamIdArg",
+        route = "$PlayersNavigationRoute/{$TeamIdArg}",
         arguments = listOf(
             navArgument(TeamIdArg) {
                 type = NavType.StringType

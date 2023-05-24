@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.skanderjabouzi.nbacompose.models.network.Player
 import com.skanderjabouzi.nbacompose.navigation.TeamDetailsDest
+import com.skanderjabouzi.nbacompose.navigation.TeamIdArg
 import com.skanderjabouzi.nbacompose.navigation.TeamPlayersListDest
 import com.skanderjabouzi.nbacompose.players.domain.TeamPlayersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +25,7 @@ class TeamPlayersViewModel @Inject constructor(
     var teamId: String
 
     init {
-        teamId = checkNotNull(savedStateHandle.get<String>(TeamPlayersListDest.teamIdArg))
+        teamId = checkNotNull(savedStateHandle.get<String>(TeamIdArg))
         getPlayers()
     }
     fun getPlayers() {

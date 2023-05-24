@@ -22,7 +22,7 @@ fun NavGraphBuilder.teamScreen(
     onButtonClicked: (Int) -> Unit,
 ) {
     composable(
-        route = "$TeamNavigationRoute/$TeamIdArg",
+        route = "$TeamNavigationRoute/{$TeamIdArg}",
         arguments = listOf(
             navArgument(TeamIdArg) {
                 type = NavType.StringType
