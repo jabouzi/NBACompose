@@ -1,6 +1,5 @@
 package com.skanderjabouzi.nbacompose.ui
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,21 +27,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.skanderjabouzi.nbacompose.R
 import com.skanderjabouzi.nbacompose.components.TeamRow
 import com.skanderjabouzi.nbacompose.components.TeamsListHeader
 import com.skanderjabouzi.nbacompose.models.network.Team
 import com.skanderjabouzi.nbacompose.teams.presentation.TeamsListViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun TeamsListScreen(
     modifier: Modifier = Modifier,
-    teamsListViewModel: TeamsListViewModel = hiltViewModel(),
+    teamsListViewModel: TeamsListViewModel = koinViewModel(),
     onItemClicked: (Int) -> Unit
 ) {
-    Log.e("TeamsListScreen", "TeamsListScreen()")
     val teamsUiState by teamsListViewModel.teams.collectAsStateWithLifecycle()
 
     Scaffold(
@@ -65,7 +63,7 @@ fun AppBar(
     modifier: Modifier = Modifier,
 ) {
     var displayMenu by remember { mutableStateOf(false) }
-    Column() {
+    Column {
         CenterAlignedTopAppBar(
             title = { Text(stringResource(id = R.string.teams_list)) },
             actions = {
@@ -112,7 +110,7 @@ fun TeamList(
         stickyHeader {
             TeamsListHeader()
         }
-        items(teamsList) { team ->
+        items(items = teamsList) { team ->
             TeamRow(team = team, onItemClicked = { teamId ->
                 if (teamId != null) {
                     onItemClicked(teamId)

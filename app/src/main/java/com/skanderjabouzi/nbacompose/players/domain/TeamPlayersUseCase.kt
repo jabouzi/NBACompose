@@ -7,13 +7,10 @@ import com.skanderjabouzi.nbacompose.helpers.SortType
 import com.skanderjabouzi.nbacompose.helpers.UseCase
 import com.skanderjabouzi.nbacompose.models.network.Player
 import com.skanderjabouzi.nbacompose.models.network.Players
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-@ViewModelScoped
-class TeamPlayersUseCase @Inject constructor(
+class TeamPlayersUseCase constructor(
     val repository: ITeamPlayersRepository
 ) : UseCase() {
     suspend fun getTeamPlayers(teamId: Int): Flow<List<Player>> {
@@ -53,7 +50,7 @@ class TeamPlayersUseCase @Inject constructor(
         }
     }
 
-    suspend fun sortByName(teamId: Int): Flow<List<Player>>  {
+    suspend fun sortByName(teamId: Int): Flow<List<Player>> {
         sortName = getSortBy(sortName)
         return repository.getSavedPlayers(teamId).map { playersFlow ->
             if (sortName == SortType.ASCENDING) {
@@ -96,6 +93,7 @@ class TeamPlayersUseCase @Inject constructor(
         repository.savePlayers(PlayerEntityAdapter.playerListToPlayerEntityList(teamId, players))
     }
 
+    @Suppress("TooGenericExceptionCaught")
     private fun convertToInt(strNbr: String): Int {
         var res = 0
         try {

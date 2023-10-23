@@ -28,20 +28,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.skanderjabouzi.nbacompose.R
 import com.skanderjabouzi.nbacompose.components.PlayerListHeader
 import com.skanderjabouzi.nbacompose.components.PlayerRow
 import com.skanderjabouzi.nbacompose.models.network.Player
 import com.skanderjabouzi.nbacompose.players.presentation.TeamPlayersViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlayersListScreen(
     modifier: Modifier = Modifier,
-    teamPlayersViewModel: TeamPlayersViewModel = hiltViewModel(),
+    teamPlayersViewModel: TeamPlayersViewModel = koinViewModel(),
     onBackClicked: (Int) -> Unit,
 ) {
     Log.e("TeamsListScreen", "TeamsListScreen()")
@@ -50,7 +50,7 @@ fun PlayersListScreen(
 
     Scaffold(
         topBar = {
-            Column() {
+            Column {
                 CenterAlignedTopAppBar(
                     title = { Text(stringResource(id = R.string.players_list)) },
                     navigationIcon = {
@@ -100,7 +100,7 @@ fun PlayersList(
             .fillMaxSize()
             .padding(top = 120.dp),
     ) {
-        items(playerList) { player ->
+        items(items = playerList) { player ->
             PlayerRow(player = player, onItemClicked = {})
         }
         item {

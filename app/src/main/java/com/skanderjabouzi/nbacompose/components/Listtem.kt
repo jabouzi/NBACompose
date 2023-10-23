@@ -2,21 +2,12 @@ package com.skanderjabouzi.nbacompose.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
-import com.skanderjabouzi.nbacompose.R
 import com.skanderjabouzi.nbacompose.models.network.Player
 import com.skanderjabouzi.nbacompose.models.network.Team
 
@@ -87,7 +78,7 @@ fun BaseRow(
                     DisplayImage(image, 40.dp, 40.dp)
                 }
                 Spacer(modifier = Modifier.width(16.dp))
-                Row() {
+                Row {
                     Text(text = title)
                 }
                 Spacer(modifier = Modifier.width(16.dp))
@@ -96,11 +87,11 @@ fun BaseRow(
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
-                    Row() {
+                    Row {
                         Text(text = firstValue)
                     }
                     Spacer(modifier = Modifier.width(36.dp))
-                    Row() {
+                    Row {
                         Text(text = secondValue)
                     }
                 }

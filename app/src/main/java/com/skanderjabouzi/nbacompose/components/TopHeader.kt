@@ -15,19 +15,20 @@ fun BaseHeader(
     secondTitle: String,
     modifier: Modifier = Modifier,
 ) {
-    Row(modifier = Modifier
-        .padding(16.dp)
+    Row(
+        modifier = Modifier
+            .padding(16.dp)
     ) {
         Row(
             horizontalArrangement = Arrangement.End,
             modifier = modifier
                 .fillMaxWidth()
         ) {
-            Row() {
+            Row {
                 Text(text = firstTitle)
             }
             Spacer(modifier = Modifier.width(16.dp))
-            Row() {
+            Row {
                 Text(text = secondTitle)
             }
         }

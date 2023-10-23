@@ -23,13 +23,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.skanderjabouzi.nbacompose.R
 import com.skanderjabouzi.nbacompose.components.DisplayImage
 import com.skanderjabouzi.nbacompose.helpers.TeamDetailsState
 import com.skanderjabouzi.nbacompose.models.network.TeamDetails
 import com.skanderjabouzi.nbacompose.team.presentation.TeamDetailsViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,7 +38,7 @@ fun TeamDetailsScreen(
     onBackClicked: () -> Unit,
     onButtonClicked: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    teamDetailsViewModel: TeamDetailsViewModel = hiltViewModel(),
+    teamDetailsViewModel: TeamDetailsViewModel = koinViewModel(),
 ) {
     Log.e("TeamDetailsScreen", "TeamDetailsScreen()")
     val teamIdUiState by teamDetailsViewModel.teamDetails.collectAsStateWithLifecycle()

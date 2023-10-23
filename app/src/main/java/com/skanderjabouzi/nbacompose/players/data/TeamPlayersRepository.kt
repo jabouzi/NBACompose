@@ -1,7 +1,7 @@
 package com.skanderjabouzi.nbacompose.players.data
 
 import com.skanderjabouzi.nbacompose.database.PlayersDao
-import com.skanderjabouzi.nbacompose.hilt.IODispatcher
+import com.skanderjabouzi.nbacompose.di.IODispatcher
 import com.skanderjabouzi.nbacompose.models.db.PlayerEntity
 import com.skanderjabouzi.nbacompose.models.network.Players
 import com.skanderjabouzi.nbacompose.network.RetrofitClient
@@ -11,9 +11,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import retrofit2.Response
-import javax.inject.Inject
 
-class TeamPlayersRepository @Inject constructor(
+class TeamPlayersRepository constructor(
     private val retrofitClient: RetrofitClient,
     private val playersDao: PlayersDao,
     @IODispatcher private val dispatcher: CoroutineDispatcher,

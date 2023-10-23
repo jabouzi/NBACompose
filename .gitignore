@@ -88,3 +88,13 @@ lint/tmp/
 
 .DS_Store
 */.DS_Store
+
+
+.tmp/
+android.lock
+android/
+caches/
+daemon/
+kotlin-profile/
+native/
+wrapper/

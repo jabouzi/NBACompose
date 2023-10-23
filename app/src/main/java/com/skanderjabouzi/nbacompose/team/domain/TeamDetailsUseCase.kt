@@ -5,13 +5,10 @@ import com.skanderjabouzi.nbacompose.helpers.ResultState
 import com.skanderjabouzi.nbacompose.helpers.TeamDetailsEntityAdapter
 import com.skanderjabouzi.nbacompose.helpers.UseCase
 import com.skanderjabouzi.nbacompose.models.network.TeamDetails
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-@ViewModelScoped
-class TeamDetailsUseCase @Inject constructor(
+class TeamDetailsUseCase constructor(
     private val repository: ITeamDetailsRepository
 ) : UseCase() {
 
@@ -24,7 +21,6 @@ class TeamDetailsUseCase @Inject constructor(
             getRemoteTeamDetails(id)
         }
     }
-
 
     private suspend fun getLocalTeamDetails(id: Int): Flow<TeamDetails> {
         return repository.getSavedTeamDetails(id).map { teamDetails ->
@@ -48,7 +44,6 @@ class TeamDetailsUseCase @Inject constructor(
                 null
             }
         }
-
     }
 
     private suspend fun saveTeamDetailsToDb(teamDetails: TeamDetails) {

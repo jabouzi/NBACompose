@@ -21,7 +21,7 @@ fun DisplayImage(
     height: Dp,
     modifier: Modifier = Modifier,
 ) {
-    Row() {
+    Row {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(image)

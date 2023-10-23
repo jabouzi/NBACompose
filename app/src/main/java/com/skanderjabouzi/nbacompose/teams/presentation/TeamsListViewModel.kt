@@ -3,20 +3,14 @@ package com.skanderjabouzi.nbacompose.teams.presentation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.skanderjabouzi.nbacompose.hilt.DefaultDispatcher
 import com.skanderjabouzi.nbacompose.models.network.Team
 import com.skanderjabouzi.nbacompose.teams.domain.TeamsListUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class TeamsListViewModel @Inject constructor(
+class TeamsListViewModel constructor(
     private val usecase: TeamsListUseCase,
-    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _teams = MutableStateFlow<List<Team>>(emptyList())
@@ -60,4 +54,3 @@ class TeamsListViewModel @Inject constructor(
         }
     }
 }
-

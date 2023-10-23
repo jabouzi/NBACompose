@@ -11,7 +11,6 @@ import com.skanderjabouzi.nbacompose.models.db.TeamEntity
     version = 2,
     exportSchema = false
 )
-
 abstract class TeamDatabase : RoomDatabase() {
 
     companion object {

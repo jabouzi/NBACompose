@@ -10,9 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.skanderjabouzi.nbacompose.app.theme.NBAComposeTheme
 import com.skanderjabouzi.nbacompose.navigation.NbaNavHost
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class NbaActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

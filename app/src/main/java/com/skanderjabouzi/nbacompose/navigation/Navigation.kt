@@ -1,18 +1,14 @@
 package com.skanderjabouzi.nbacompose.navigation
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import com.skanderjabouzi.nbacompose.navigation.player.playersScreen
 import com.skanderjabouzi.nbacompose.navigation.team.TeamGraphNavigationRoute
-import com.skanderjabouzi.nbacompose.navigation.team.TeamNavigationRoute
-import com.skanderjabouzi.nbacompose.navigation.team.TeamsNavigationRoute
 import com.skanderjabouzi.nbacompose.navigation.team.navigateToTeamDetails
 import com.skanderjabouzi.nbacompose.navigation.team.teamGraph
 

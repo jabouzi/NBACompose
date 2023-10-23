@@ -11,7 +11,7 @@ import java.io.InputStreamReader
 import java.net.URI
 import java.util.*
 
-class MockInterceptor(val context: Context): Interceptor {
+class MockInterceptor(val context: Context) : Interceptor {
 
     private var contentType = "application/json"
 
@@ -37,11 +37,11 @@ class MockInterceptor(val context: Context): Interceptor {
         val defaultFileName = getFileName(chain)
         Log.d(TAG, "--> File :$defaultFileName")
 
-        //create file name with http method
-        //eg: getLogin.json
+        // create file name with http method
+        // eg: getLogin.json
         listSuggestionFileName.add(method + upCaseFirstLetter(defaultFileName))
 
-        //eg: login.json
+        // eg: login.json
         listSuggestionFileName.add(defaultFileName)
         val responseFileName = getFirstFileNameExist(listSuggestionFileName, uri)
         if (responseFileName != null) {
@@ -89,7 +89,7 @@ class MockInterceptor(val context: Context): Interceptor {
         var mockDataPath = uri.host + uri.path
         mockDataPath = mockDataPath.substring(0, mockDataPath.lastIndexOf('/'))
         Log.d(TAG, "Scan files in: $mockDataPath")
-        //List all files in folder
+        // List all files in folder
         val files = context.assets.list(mockDataPath)
         Log.d(TAG, "Files: " + Arrays.toString(files))
         for (fileName in inputFileNames) {

@@ -7,13 +7,10 @@ import com.skanderjabouzi.nbacompose.helpers.TeamEntityAdapter
 import com.skanderjabouzi.nbacompose.helpers.UseCase
 import com.skanderjabouzi.nbacompose.models.network.Team
 import com.skanderjabouzi.nbacompose.models.network.Teams
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-@ViewModelScoped
-class TeamsListUseCase @Inject constructor(
+class TeamsListUseCase constructor(
     private val repository: ITeamsRepository,
 ) : UseCase() {
 

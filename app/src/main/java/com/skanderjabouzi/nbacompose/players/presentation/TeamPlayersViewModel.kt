@@ -4,18 +4,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.skanderjabouzi.nbacompose.models.network.Player
-import com.skanderjabouzi.nbacompose.navigation.TeamDetailsDest
 import com.skanderjabouzi.nbacompose.navigation.TeamIdArg
-import com.skanderjabouzi.nbacompose.navigation.TeamPlayersListDest
 import com.skanderjabouzi.nbacompose.players.domain.TeamPlayersUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class TeamPlayersViewModel @Inject constructor(
+class TeamPlayersViewModel constructor(
     savedStateHandle: SavedStateHandle,
     val usecase: TeamPlayersUseCase
 ) : ViewModel() {
@@ -28,6 +23,7 @@ class TeamPlayersViewModel @Inject constructor(
         teamId = checkNotNull(savedStateHandle.get<String>(TeamIdArg))
         getPlayers()
     }
+
     fun getPlayers() {
         viewModelScope.launch {
             usecase.getTeamPlayers(teamId.toInt()).collect {
