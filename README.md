@@ -3,7 +3,7 @@
 Copyright (c) 2023 Skander Jabouzi
 
 * This app is my playground to stay up-to-date with Anroid best practices, Kotlin, MVVM, Dragger / Hitl, Liveùdata / Flow, Clean Architecture.
-* This is the Compose version of https://github.com/jabouzi/NBACompose
+* This is the Compose version of https://github.com/jabouzi/NBATeamViewer
 * Unit tests and UI tests are available
 * Please use mockDebug flavor for UI tests.
 * The asset folder contains all the payloads
